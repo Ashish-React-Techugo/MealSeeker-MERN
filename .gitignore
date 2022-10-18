@@ -5,3 +5,5 @@
 
 # production
 /frontend/build
+/backend/.env
+/backend/storage
