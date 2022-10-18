@@ -8,9 +8,7 @@ const Home = () => {
     console.log(auth)
   return (
     <div>
-   <Header/>
-   {/* <Login/> */}
-   {/* <Register/> */}
+      home
     </div>
   )
 }
