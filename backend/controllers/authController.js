@@ -69,7 +69,7 @@ class AuthController {
                 }
                 else {
                     res.json({ statusCode: 400, status: false, message: "Wrong Password" })
-                }
+                }    
             } else {
                 user = await User.findOne({ phone: loginfield });
                 if (user) {
