@@ -1,7 +1,10 @@
-* {
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+.image{
+    opacity: 0.7;
 }
 .main{
     display: grid;
@@ -15,7 +18,7 @@ body {
   background-color: #111;
     background-size: cover;
     background-position: center;
-    /* position: relative; */
+    position: relative;
 }
 
 .container {
@@ -93,4 +96,4 @@ color: #0c6f96;
         left: 0px;
         padding: 50px;
     }
-}
+} */
