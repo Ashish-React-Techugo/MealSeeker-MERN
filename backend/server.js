@@ -1,5 +1,6 @@
 const express = require('express')
 const authRoute=require('./routes/authRoute');
+const adminRoute=require('./routes/adminRoute');
 const cors=require('cors');
 require('dotenv').config()
 const app = express();
@@ -19,6 +20,7 @@ db.once('open', () => {
     console.log('DB connected');
 })
 app.use('/',authRoute)
+app.use('/admin',adminRoute)
 app.listen(process.env.PORT,()=>{
     console.log("Server running at port ",process.env.PORT)
 })
