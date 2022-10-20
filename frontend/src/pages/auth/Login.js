@@ -5,8 +5,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import '../../styles/Login.css'
 import background from '../../images/background.png'
+import {useDispatch} from 'react-redux';
+import { login } from '../../redux/actions/authAction';
 const userSchema = yup.object().shape({
-    email: yup
+    loginfield: yup
       .string()
       .required("This field is required"),
     password: yup.string().required("Password field is required")
@@ -14,7 +16,7 @@ const userSchema = yup.object().shape({
   });
 
 const Login = () => {
-  
+    const dispatch = useDispatch()
     const {
         register,
         handleSubmit,
@@ -25,8 +27,10 @@ const Login = () => {
         resolver: yupResolver(userSchema),
       });
       
-      const onSubmit=handleSubmit((values) => {
+      const onSubmit=handleSubmit(async(values) => {
         console.log("Hello",values)
+        let res =await dispatch(login(values))
+        console.log(res)
       });
 
       
@@ -39,11 +43,11 @@ const Login = () => {
     <div className="form-group">
         <label>Email</label> 
         <br/>
-        <input type="email" name="email" placeholder="Enter Email...."
-         {...register("email")}/>
-           {errors.email ? (
+        <input type="email" name="loginfield" placeholder="Enter Email...."
+         {...register("loginfield")}/>
+           {errors.loginfield ? (
                                   <div className="input-field-error">
-                                    {errors.email.message}
+                                    {errors.loginfield.message}
                                   </div>
                                 ) : null}
     </div>
