@@ -43,10 +43,10 @@ class AuthController {
                     userImage: `/storage/${imagePath}`
                 })
                 await newUser.save()
-                res.json({ statusCode: 200, data: newUser, status: true, message: "reached at the end" })
+                res.json({ statusCode: 200, status: true, message: "User Registered Successfully!!" })
             }
         } catch (err) {
-            // console.log(err)
+
             res.status(209).json({ statusCode: 500, status: false, message: err.message })
         }
     };
