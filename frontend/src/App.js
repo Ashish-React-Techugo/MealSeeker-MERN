@@ -10,6 +10,16 @@ import Header from './components/Header';
 
 
 function App() {
+  // fetch('http://localhost:8000/login',{
+  //   method:'post',
+  //   body:JSON.stringify({
+  //     loginfield:'9650321168',
+  //     password:"ashish"
+  //   }),
+  //   headers:{
+  //     'Content-Type':'application/json'
+  //   }
+  // }).then(res=>res.json()).then(json=>console.log(json))
   return (
     <BrowserRouter>
       <Header />
