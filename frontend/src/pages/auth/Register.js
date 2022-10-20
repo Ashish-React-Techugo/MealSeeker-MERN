@@ -1,12 +1,14 @@
-import React from 'react'
+import React,{useState} from 'react'
 import {Link} from 'react-router-dom'
 import '../../styles/Register.css'
 import background from '../../images/background.png'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import user from '../../images/user.png'
+import { signUp } from '../../api/auth';
 const userSchema = yup.object().shape({
-    fullname: yup
+    userName: yup
     .string()
     .required("This field is required"),
     type: yup
@@ -25,6 +27,7 @@ const userSchema = yup.object().shape({
 
   });
 const Register = () => {
+  const [userImage,setUserImage]=useState(user)
     const {
         register,
         handleSubmit,
@@ -34,9 +37,11 @@ const Register = () => {
       } = useForm({
         resolver: yupResolver(userSchema),
       });
-      
+      // console.log(userImage)
       const onSubmit=handleSubmit((values) => {
-        console.log("Hello",values)
+        // console.log("Hello",values)
+        let res = signUp({...values,userImage});
+        console.log(res)
       });
   return (
     <div className='main' style={{display:"grid",gridTemplateColumns:"50% 50%"}}>
@@ -46,11 +51,11 @@ const Register = () => {
     <div class="form-group">
         <label>Full Name</label> 
         <br/>
-        <input type="FullName" name="name" placeholder="Enter Your Full Name...."
-         {...register("fullname")}/>
-         {errors.fullname ? (
+        <input type="text" name="name" placeholder="Enter Your Full Name...."
+         {...register("userName")}/>
+         {errors.userName ? (
                                   <div className="input-field-error">
-                                    {errors.fullname.message}
+                                    {errors.userName.message}
                                   </div>
                                 ) : null}
     </div>
@@ -98,7 +103,7 @@ const Register = () => {
                                   </div>
                                 ) : null}
     </div>
-    <div class="form-group">
+    <div class="form-group">  
         <label>Password</label> <br/>
         <input type="password" name="password" placeholder="Enter Password..."
          {...register("password")}/>
@@ -107,6 +112,17 @@ const Register = () => {
                                     {errors.password.message}
                                   </div>
                                 ) : null}
+    </div>
+    <div class="form-group">  
+        <label htmlFor='user-image'><img src={userImage} style={{height:"300px",width:"300px",objectFit:"contain"}} /></label> <br/>
+        <input style={{display:"none"}} onChange={(e)=>{
+          var file = e.target.files[0];
+          var reader = new FileReader();
+          reader.onloadend = function() {
+            setUserImage(reader.result)
+          }
+          reader.readAsDataURL(file)
+        }} id="user-image" type="file" placeholder="Enter Password..."/>
     </div>
     <p>Already Have An Account?</p>
     <Link to="/login"> LogIn Now</Link> <br/>

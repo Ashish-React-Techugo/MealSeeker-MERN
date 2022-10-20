@@ -6,7 +6,7 @@ const app = express();
 const mongoose = require('mongoose')
 const MongoURL = process.env.MONGOB_URL;
 
-app.use(express.json())
+app.use(express.json({limit:'8mb'}))
 app.use(cors());
 app.use('/storage',express.static('storage'))
 mongoose.connect(MongoURL, {
